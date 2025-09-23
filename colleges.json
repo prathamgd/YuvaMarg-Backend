@@ -1,0 +1,16 @@
+[
+  {
+    "id": 101,
+    "name": "Indian Institute of Technology, Bombay",
+    "location": "Mumbai, India",
+    "programs": ["Computer Science", "Electrical Engineering"],
+    "ranking": 1
+  },
+  {
+    "id": 102,
+    "name": "Delhi Technological University",
+    "location": "Delhi, India",
+    "programs": ["Software Engineering", "Data Science"],
+    "ranking": 5
+  }
+]
