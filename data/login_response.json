@@ -1,0 +1,6 @@
+{
+  "success": true,
+  "message": "Login successful.",
+  "user_id": "mock_user_123",
+  "auth_token": "mock_token_abcdef123"
+}
