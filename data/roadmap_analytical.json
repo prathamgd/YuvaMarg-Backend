@@ -1,0 +1,10 @@
+{
+  "title": "The Analytical Thinker",
+  "description": "Your answers indicate a strong aptitude for logic, data, and problem-solving. This path is tailored for careers that require sharp analytical skills.",
+  "recommended_careers": [
+    { "name": "Data Analyst", "avg_salary": "₹7,50,000 LPA" },
+    { "name": "Software Developer (Backend)", "avg_salary": "₹8,00,000 LPA" },
+    { "name": "Financial Analyst", "avg_salary": "₹7,00,000 LPA" }
+  ],
+  "suggested_courses": ["Post Graduate Program in Data Science", "Full Stack Web Development", "Financial Modeling & Valuation Analyst (FMVA)"]
+}

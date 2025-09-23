@@ -1,0 +1,10 @@
+{
+  "title": "The Master Planner",
+  "description": "You excel at structure, planning, and execution. This roadmap is for careers where organization and attention to detail are paramount.",
+  "recommended_careers": [
+    { "name": "Project Manager", "avg_salary": "₹12,00,000 LPA" },
+    { "name": "Event Manager", "avg_salary": "₹6,50,000 LPA" },
+    { "name": "Operations Analyst", "avg_salary": "₹7,00,000 LPA" }
+  ],
+  "suggested_courses": ["Certified Associate in Project Management (CAPM)", "Diploma in Event Management", "Business Process Management Certification"]
+}
