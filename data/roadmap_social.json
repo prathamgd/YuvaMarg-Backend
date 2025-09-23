@@ -1,0 +1,10 @@
+{
+  "title": "The People Person",
+  "description": "Your strengths lie in communication, empathy, and collaboration. This path is designed for careers focused on helping and interacting with people.",
+  "recommended_careers": [
+    { "name": "Human Resources (HR) Manager", "avg_salary": "₹8,50,000 LPA" },
+    { "name": "Public Relations Specialist", "avg_salary": "₹6,00,000 LPA" },
+    { "name": "Counselor", "avg_salary": "₹5,00,000 LPA" }
+  ],
+  "suggested_courses": ["MBA in Human Resource Management", "MA in Public Relations", "Master's in Psychology"]
+}
