@@ -1420,12 +1420,13 @@
                     <h3>${career.title || 'No Title'}</h3>
                     <p>${career.description || 'No description available.'}</p>
                     <div style="margin-top: 15px;">
-                        <p><strong>Avg Salary:</strong> ${career.avg_salary || 'N/A'}</p>
-                        <p><strong>Growth:</strong> ${career.growth_rate || 'N/A'}</p>
+                        <p><strong>Avg Salary:</strong> ${career.average_salary || 'N/A'}</p> 
+                        <p><strong>Growth:</strong> ${career.growth || 'N/A'}</p>
                     </div>
                 </div>
-                <div class="career-card-footer">
-                    <button class="btn">Explore Details</button>
+                <div class="career-card-footer" style="display: flex; gap: 10px;">
+                    <button class="btn" style="flex: 1;">Explore Details</button>
+                    <button class="btn" onclick="toggleComparison('${career.id}', this)" style="flex: 1; background: var(--secondary-color); color: #333;">Add to Compare</button>
                 </div>
             </div>`;
 
