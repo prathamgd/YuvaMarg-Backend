@@ -1261,6 +1261,23 @@
         <section id="careers" class="module">
             <h2><span class="icon">C</span>Career Exploration Hub</h2>
             <input type="text" class="search-bar" placeholder="Search careers by name, field, or skills..." style="margin-bottom: 25px;">
+            <div class="comparison-container" id="comparison-container">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                    <div>
+                        <strong>Career Comparison Tool</strong>
+                        <p style="margin: 5px 0; opacity: 0.8;">Select up to 2 careers from the cards below to compare.</p>
+                        <span style="font-weight: 600;">Selected: <span id="comparison-count">0/2</span></span>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button id="compare-btn" class="btn" onclick="compareSelectedCareers()" disabled>Compare Selected</button>
+                        <button class="btn" style="background: var(--secondary-color); color: #333;" onclick="clearComparison()">Clear</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="comparison-results" style="display: none; margin: 25px 0;">
+            </div>
+            
             <div id="careers-grid" class="career-grid"></div>
         </section>
 
