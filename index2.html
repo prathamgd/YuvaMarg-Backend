@@ -1083,7 +1083,7 @@
                 right: 5vw;
             }
         }
-        
+
         .loading-container {
             text-align: center;
             padding: 50px;
@@ -1262,7 +1262,7 @@
             <h2><span class="icon">C</span>Career Exploration Hub</h2>
             <input type="text" class="search-bar" placeholder="Search careers by name, field, or skills..." style="margin-bottom: 25px;">
             <div class="comparison-container" id="comparison-container">
-                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
                     <div>
                         <strong>Career Comparison Tool</strong>
                         <p style="margin: 5px 0; opacity: 0.8;">Select up to 2 careers from the cards below to compare.</p>
@@ -1274,10 +1274,7 @@
                     </div>
                 </div>
             </div>
-
-            <div id="comparison-results" style="display: none; margin: 25px 0;">
-            </div>
-            
+            <div id="comparison-results" style="display: none; margin: 25px 0;"></div>
             <div id="careers-grid" class="career-grid"></div>
         </section>
 
@@ -1347,6 +1344,8 @@
                 <ul style="list-style: none; padding: 0; line-height: 2;">
                     <li><a href="#" style="color: var(--text-color); text-decoration: none;">AI Assistant</a></li>
                     <li><a href="#" style="color: var(--text-color); text-decoration: none;">Help Center</a></li>
+                    <li><a href="#" style="color: var(--text-color); text-decoration: none;">Documentation</a></li>
+                    <li><a href="#" style="color: var(--text-color); text-decoration: none;">Training Resources</a></li>
                     <li><a href="#" style="color: var(--text-color); text-decoration: none;">Contact Support</a></li>
                 </ul>
             </div>
@@ -1369,40 +1368,45 @@
             <button onclick="toggleLogin()" style="width:100%; padding:8px; background:transparent; color:var(--text-color); border:1px solid var(--border-color); border-radius:8px; cursor:pointer; font-size:0.9rem; margin-top: 10px;">Cancel</button>
         </div>
     </div>
-
-    <!-- SCRIPT SECTION -->
+    
+    <!-- ============================================= -->
+    <!-- === SCRIPT SECTION (INCLUDES API INTEGRATION) === -->
+    <!-- ============================================= -->
     <script>
         // --- 1. CONFIGURATION ---
         // IMPORTANT: Replace this placeholder with your actual live backend URL!
         const API_BASE_URL = 'https://yuvamarg-backend.onrender.com';
 
-        // --- 2. DYNAMIC DATA LOADING & RENDERING ---
-        
-        /**
-         * A generic helper function to fetch data from an endpoint and render it into a container.
-         * @param {string} endpoint - The API endpoint to call (e.g., 'careers', 'mentors').
-         * @param {string} containerId - The ID of the HTML element where the content will be injected.
-         * @param {function} renderer - A function that takes a single data item and returns an HTML string.
-         */
+        // This local data is needed for the comparison feature to work, as it requires details.
+        const careerData = {
+            'software-engineer': { title: 'Software Engineer', details: 'Design and develop software applications.', salary: '₹8-25 LPA', growth: 'High demand', education: 'B.Tech in CS/IT' },
+            'data-scientist': { title: 'Data Scientist', details: 'Analyze complex data sets.', salary: '₹12-30 LPA', growth: 'Very High', education: 'B.Tech/M.Tech + Analytics' },
+            'mechanical-engineer': { title: 'Mechanical Engineer', details: 'Design, develop, and test mechanical systems.', salary: '₹6-20 LPA', growth: 'Stable', education: 'B.Tech Mechanical' },
+            'research-scientist': { title: 'Research Scientist', details: 'Conduct research in specialized fields.', salary: '₹10-25 LPA', growth: 'Moderate', education: 'PhD in relevant field' },
+            'product-manager': { title: 'Product Manager', details: 'Lead product development from conception to launch.', salary: '₹15-40 LPA', growth: 'High', education: 'Engineering/MBA' },
+            'cybersecurity-analyst': { title: 'Cybersecurity Analyst', details: 'Protect organizations from cyber threats.', salary: '₹8-22 LPA', growth: 'Very High', education: 'B.Tech CS + Certifications' }
+        };
+
+        // --- 2. STATE MANAGEMENT ---
+        let currentModule = 'dashboard';
+        let aiChatOpen = false;
+        let selectedCareers = [];
+
+        // --- 3. DYNAMIC DATA LOADING & RENDERING ---
         async function loadAndRender(endpoint, containerId, renderer) {
             const container = document.getElementById(containerId);
             if (!container) return;
-
-            container.innerHTML = `<div class="loading-container"><div class="loading"></div><p>Loading Data...</p></div>`; // Show loading state
+            container.innerHTML = `<div class="loading-container"><div class="loading"></div><p>Loading Data...</p></div>`;
             try {
                 const response = await fetch(`${API_BASE_URL}/${endpoint}`);
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const data = await response.json();
-                
-                container.innerHTML = ''; // Clear loading state
+                container.innerHTML = '';
                 if (data && Array.isArray(data) && data.length > 0) {
-                    data.forEach(item => {
-                        container.innerHTML += renderer(item);
-                    });
-                } else if (data && !Array.isArray(data)) { // Handle single object responses like a profile
+                    data.forEach(item => container.innerHTML += renderer(item));
+                } else if (data && !Array.isArray(data)) {
                     container.innerHTML = renderer(data);
-                }
-                else {
+                } else {
                     container.innerHTML = '<p style="text-align:center;">No data found for this section.</p>';
                 }
             } catch (error) {
@@ -1411,8 +1415,6 @@
             }
         }
 
-        // --- RENDERER FUNCTIONS (HTML TEMPLATES) ---
-
         const renderCareer = (career) => `
             <div class="career-card" data-career-id="${career.id || ''}">
                 <div class="career-card-content">
@@ -1420,7 +1422,7 @@
                     <h3>${career.title || 'No Title'}</h3>
                     <p>${career.description || 'No description available.'}</p>
                     <div style="margin-top: 15px;">
-                        <p><strong>Avg Salary:</strong> ${career.average_salary || 'N/A'}</p> 
+                        <p><strong>Avg Salary:</strong> ${career.average_salary || 'N/A'}</p>
                         <p><strong>Growth:</strong> ${career.growth || 'N/A'}</p>
                     </div>
                 </div>
@@ -1431,7 +1433,7 @@
             </div>`;
 
         const renderMentor = (mentor) => `
-            <div class="career-card"> <!-- Reusing style for consistency -->
+            <div class="career-card">
                 <h3>${mentor.name || 'No Name'}</h3>
                 <p style="color: var(--primary-color); font-weight: 600;">${mentor.title || 'No Title'}</p>
                 <p>${mentor.experience || ''}</p>
@@ -1439,7 +1441,7 @@
                     <button class="btn">Connect</button>
                 </div>
             </div>`;
-        
+
         const renderOpportunity = (opp) => `
              <div class="opportunity-card">
                 <div class="deadline-badge">${opp.deadline || 'Ongoing'}</div>
@@ -1493,10 +1495,8 @@
             </div>`;
         }
 
-        // --- 3. CORE UI AND NAVIGATION LOGIC (Your existing functions) ---
-        let currentModule = 'dashboard';
-        let aiChatOpen = false;
-        let selectedCareers = [];
+
+        // --- 4. UI & FEATURE-SPECIFIC FUNCTIONS ---
 
         function toggleTheme() {
             const body = document.body;
@@ -1507,44 +1507,6 @@
 
         function initializeTheme() {
             document.getElementById('theme-icon').textContent = '☀️';
-        }
-
-        function switchModule(moduleId) {
-            if (!moduleId) return;
-
-            document.querySelectorAll('.module').forEach(module => module.classList.remove('active'));
-            document.querySelectorAll('.main-navigation .header-nav-tab').forEach(tab => tab.classList.remove('active'));
-            
-            const targetModule = document.getElementById(moduleId);
-            const targetTab = document.querySelector(`.main-navigation [data-module="${moduleId}"]`);
-            
-            if (targetModule && targetTab) {
-                targetModule.classList.add('active');
-                targetTab.classList.add('active');
-                currentModule = moduleId;
-
-                // ** THE INTEGRATION HAPPENS HERE **
-                switch (moduleId) {
-                    case 'careers':
-                        loadAndRender('careers', 'careers-grid', renderCareer);
-                        break;
-                    case 'mentorship':
-                        loadAndRender('mentors', 'mentors-grid', renderMentor);
-                        break;
-                    case 'opportunities':
-                        loadAndRender('opportunities', 'opportunities-grid', renderOpportunity);
-                        break;
-                    case 'colleges':
-                         loadAndRender('colleges', 'colleges-grid', renderCollege);
-                        break;
-                    case 'skillhub':
-                        loadAndRender('skills', 'skills-grid', renderSkill);
-                        break;
-                    case 'profile':
-                        loadAndRender('profile/1', 'profile-content', renderProfile); // Assuming endpoint /profile/1 for current user
-                        break;
-                }
-            }
         }
 
         function startAssessment(type) {
@@ -1569,6 +1531,87 @@
             }
         }
         
+        // Comparison Tool Logic
+        function toggleComparison(careerId, button) {
+            const index = selectedCareers.indexOf(careerId);
+            
+            if (index > -1) {
+                selectedCareers.splice(index, 1);
+                button.textContent = 'Add to Compare';
+                button.style.background = 'var(--secondary-color)';
+                button.style.color = '#333';
+            } else if (selectedCareers.length < 2) {
+                selectedCareers.push(careerId);
+                button.textContent = 'Added ✓';
+                button.style.background = 'var(--success-color)';
+                button.style.color = 'white';
+            } else {
+                alert('You can only compare 2 careers at a time. Please remove one first.');
+                return;
+            }
+            updateComparisonUI();
+        }
+
+        function updateComparisonUI() {
+            const countSpan = document.getElementById('comparison-count');
+            const compareBtn = document.getElementById('compare-btn');
+            const container = document.getElementById('comparison-container');
+            if(!countSpan || !compareBtn || !container) return;
+
+            countSpan.textContent = `${selectedCareers.length}/2`;
+            compareBtn.disabled = selectedCareers.length !== 2;
+            
+            if (selectedCareers.length > 0) {
+                container.classList.add('active');
+            } else {
+                container.classList.remove('active');
+            }
+        }
+
+        function clearComparison() {
+            selectedCareers = [];
+            document.querySelectorAll('#careers-grid .career-card button').forEach(button => {
+                if (button.textContent.includes('Added')) {
+                    button.textContent = 'Add to Compare';
+                    button.style.background = 'var(--secondary-color)';
+                    button.style.color = '#333';
+                }
+            });
+            updateComparisonUI();
+            document.getElementById('comparison-results').style.display = 'none';
+        }
+
+        function compareSelectedCareers() {
+            if (selectedCareers.length !== 2) return;
+            const career1 = careerData[selectedCareers[0]];
+            const career2 = careerData[selectedCareers[1]];
+            if (!career1 || !career2) {
+                alert('An error occurred. Make sure the selected careers exist in the local careerData object for comparison.');
+                return;
+            }
+            const comparisonHTML = `
+                <h3>Comparison: ${career1.title} vs. ${career2.title}</h3>
+                <div class="comparison-grid">
+                    <div class="comparison-item">
+                        <h4>${career1.title}</h4>
+                        <p><strong>Description:</strong> ${career1.details}</p>
+                        <p><strong>Average Salary:</strong> ${career1.salary}</p>
+                        <p><strong>Growth Potential:</strong> ${career1.growth}</p>
+                        <p><strong>Education Path:</strong> ${career1.education}</p>
+                    </div>
+                    <div class="comparison-item">
+                        <h4>${career2.title}</h4>
+                        <p><strong>Description:</strong> ${career2.details}</p>
+                        <p><strong>Average Salary:</strong> ${career2.salary}</p>
+                        <p><strong>Growth Potential:</strong> ${career2.growth}</p>
+                        <p><strong>Education Path:</strong> ${career2.education}</p>
+                    </div>
+                </div>`;
+            const resultsContainer = document.getElementById('comparison-results');
+            resultsContainer.innerHTML = comparisonHTML;
+            resultsContainer.style.display = 'block';
+        }
+
         // AI Chat Bot Functions
         function toggleAIChat() {
             const chatWindow = document.getElementById('ai-chat-window');
@@ -1649,22 +1692,52 @@
             }
         }
 
+        // --- 5. MAIN NAVIGATION LOGIC ---
+        function switchModule(moduleId) {
+            if (!moduleId) return;
+            currentModule = moduleId;
+            document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
+            document.querySelectorAll('.main-navigation .header-nav-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(moduleId)?.classList.add('active');
+            document.querySelector(`.main-navigation [data-module="${moduleId}"]`)?.classList.add('active');
+
+            switch (moduleId) {
+                case 'careers':
+                    loadAndRender('careers', 'careers-grid', renderCareer);
+                    break;
+                case 'mentorship':
+                    loadAndRender('mentors', 'mentors-grid', renderMentor);
+                    break;
+                case 'opportunities':
+                    loadAndRender('opportunities', 'opportunities-grid', renderOpportunity);
+                    break;
+                case 'colleges':
+                     loadAndRender('colleges', 'colleges-grid', renderCollege);
+                    break;
+                case 'skillhub':
+                    loadAndRender('skills', 'skills-grid', renderSkill);
+                    break;
+                case 'profile':
+                    loadAndRender('profile/1', 'profile-content', renderProfile);
+                    break;
+            }
+        }
+        
+        // --- 6. INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', function() {
             initializeTheme();
             
             document.querySelectorAll('.main-navigation .header-nav-tab').forEach(tab => {
                 if (tab.dataset.module) {
-                    tab.addEventListener('click', () => {
-                        switchModule(tab.dataset.module);
-                    });
+                    tab.addEventListener('click', () => switchModule(tab.dataset.module));
                 }
             });
             
             document.querySelectorAll('[data-module-link]').forEach(link => {
-                link.addEventListener('click', () => {
-                    switchModule(link.dataset.moduleLink);
-                });
+                link.addEventListener('click', () => switchModule(link.dataset.moduleLink));
             });
+
+            updateComparisonUI(); // Initialize the comparison tool UI
 
             console.log('Yuva Marg Enhanced Platform with AI Assistant Loaded Successfully!');
         });
