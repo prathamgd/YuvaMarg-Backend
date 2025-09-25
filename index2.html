@@ -1433,10 +1433,11 @@
             </div>`;
 
         const renderMentor = (mentor) => `
-            <div class="career-card">
+            <div class="career-card"> <!-- Reusing style for consistency -->
                 <h3>${mentor.name || 'No Name'}</h3>
-                <p style="color: var(--primary-color); font-weight: 600;">${mentor.title || 'No Title'}</p>
-                <p>${mentor.experience || ''}</p>
+                <p style="color: var(--primary-color); font-weight: 600;">${mentor.field || 'No Title'}</p> 
+                <p>${mentor.bio || ''}</p>
+                <p><strong>Experience:</strong> ${mentor.experience || 'N/A'}</p>
                 <div class="career-card-footer">
                     <button class="btn">Connect</button>
                 </div>
