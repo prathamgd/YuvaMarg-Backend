@@ -1,10 +1,15 @@
-{
-  "name": "Arhan",
-  "email": "arhan@example.com",
-  "bio": "12th-grade student interested in computer science.",
-  "progress": {
-    "self_discovery": "completed",
-    "roadmap": "in_progress"
-  },
-  "current_skills": ["Python Basics", "Web Development Fundamentals"]
-}
+[
+  {
+    "id": 1,
+    "name": "Arhan",
+    "email": "arhan@example.com",
+    "bio": "12th-grade student interested in computer science.",
+    "class": "12th Science",
+    "interests": ["Python Basics", "Web Development Fundamentals"],
+    "personality": "INTJ (The Architect)",
+    "progress": {
+      "self_discovery": "completed",
+      "roadmap": "in_progress"
+    }
+  }
+]
