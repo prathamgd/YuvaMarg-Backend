@@ -1534,9 +1534,8 @@
         // Comparison Tool Logic
         // Comparison Tool Logic (NOW FIXED)
         function toggleComparison(careerId, button) {
-            const careerIdStr = String(careerId); // Ensure ID is a string for consistent matching
+            const careerIdStr = String(careerId);
             const index = selectedCareers.indexOf(careerIdStr);
-            
             if (index > -1) {
                 selectedCareers.splice(index, 1);
                 button.textContent = 'Add to Compare';
@@ -1549,7 +1548,6 @@
                 button.style.color = 'white';
             } else {
                 alert('You can only compare 2 careers at a time. Please remove one first.');
-                return;
             }
             updateComparisonUI();
         }
@@ -1559,15 +1557,9 @@
             const compareBtn = document.getElementById('compare-btn');
             const container = document.getElementById('comparison-container');
             if(!countSpan || !compareBtn || !container) return;
-
             countSpan.textContent = `${selectedCareers.length}/2`;
             compareBtn.disabled = selectedCareers.length !== 2;
-            
-            if (selectedCareers.length > 0) {
-                container.classList.add('active');
-            } else {
-                container.classList.remove('active');
-            }
+            container.classList.toggle('active', selectedCareers.length > 0);
         }
 
         function clearComparison() {
@@ -1585,40 +1577,39 @@
 
         function compareSelectedCareers() {
             if (selectedCareers.length !== 2) return;
-
-            // NEW: Search the live 'allCareersData' array instead of the old hardcoded object
             const career1 = allCareersData.find(c => String(c.id) === selectedCareers[0]);
             const career2 = allCareersData.find(c => String(c.id) === selectedCareers[1]);
             
             if (!career1 || !career2) {
-                // This is the error message you saw. It shouldn't appear anymore.
-                alert('An error occurred. Make sure the selected careers exist in the data fetched from the API.');
+                alert('A data error occurred. Could not find selected careers in the live data.');
                 return;
             }
 
+            // This is the "bulletproof" HTML generation. It safely handles missing data.
             const comparisonHTML = `
-                <h3>Comparison: ${career1.title} vs. ${career2.title}</h3>
+                <h3>Comparison: ${career1.title || 'Career 1'} vs. ${career2.title || 'Career 2'}</h3>
                 <div class="comparison-grid">
                     <div class="comparison-item">
-                        <h4>${career1.title}</h4>
-                        <p><strong>Description:</strong> ${career1.description}</p>
-                        <p><strong>Average Salary:</strong> ${career1.average_salary}</p>
-                        <p><strong>Growth Potential:</strong> ${career1.growth}</p>
-                        <p><strong>Key Skills:</strong> ${(career1.skills || []).join(', ')}</p>
+                        <h4>${career1.title || 'N/A'}</h4>
+                        <p><strong>Description:</strong> ${career1.description || 'N/A'}</p>
+                        <p><strong>Average Salary:</strong> ${career1.average_salary || 'N/A'}</p>
+                        <p><strong>Growth Potential:</strong> ${career1.growth || 'N/A'}</p>
+                        <p><strong>Key Skills:</strong> ${Array.isArray(career1.skills) ? career1.skills.join(', ') : 'N/A'}</p>
                     </div>
                     <div class="comparison-item">
-                        <h4>${career2.title}</h4>
-                        <p><strong>Description:</strong> ${career2.description}</p>
-                        <p><strong>Average Salary:</strong> ${career2.average_salary}</p>
-                        <p><strong>Growth Potential:</strong> ${career2.growth}</p>
-                        <p><strong>Key Skills:</strong> ${(career2.skills || []).join(', ')}</p>
+                        <h4>${career2.title || 'N/A'}</h4>
+                        <p><strong>Description:</strong> ${career2.description || 'N/A'}</p>
+                        <p><strong>Average Salary:</strong> ${career2.average_salary || 'N/A'}</p>
+                        <p><strong>Growth Potential:</strong> ${career2.growth || 'N/A'}</p>
+                        <p><strong>Key Skills:</strong> ${Array.isArray(career2.skills) ? career2.skills.join(', ') : 'N/A'}</p>
                     </div>
                 </div>`;
+            
             const resultsContainer = document.getElementById('comparison-results');
             resultsContainer.innerHTML = comparisonHTML;
-            resultsContainer.style.display = 'block';
+            resultsContainer.style.display = 'block'; // Make the results visible
         }
-        
+
         // AI Chat Bot Functions
         function toggleAIChat() {
             const chatWindow = document.getElementById('ai-chat-window');
