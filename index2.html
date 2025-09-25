@@ -1532,8 +1532,10 @@
         }
         
         // Comparison Tool Logic
+        // Comparison Tool Logic (NOW FIXED)
         function toggleComparison(careerId, button) {
-            const index = selectedCareers.indexOf(careerId);
+            const careerIdStr = String(careerId); // Ensure ID is a string for consistent matching
+            const index = selectedCareers.indexOf(careerIdStr);
             
             if (index > -1) {
                 selectedCareers.splice(index, 1);
@@ -1541,7 +1543,7 @@
                 button.style.background = 'var(--secondary-color)';
                 button.style.color = '#333';
             } else if (selectedCareers.length < 2) {
-                selectedCareers.push(careerId);
+                selectedCareers.push(careerIdStr);
                 button.textContent = 'Added ✓';
                 button.style.background = 'var(--success-color)';
                 button.style.color = 'white';
@@ -1583,35 +1585,40 @@
 
         function compareSelectedCareers() {
             if (selectedCareers.length !== 2) return;
-            const career1 = careerData[selectedCareers[0]];
-            const career2 = careerData[selectedCareers[1]];
+
+            // NEW: Search the live 'allCareersData' array instead of the old hardcoded object
+            const career1 = allCareersData.find(c => String(c.id) === selectedCareers[0]);
+            const career2 = allCareersData.find(c => String(c.id) === selectedCareers[1]);
+            
             if (!career1 || !career2) {
-                alert('An error occurred. Make sure the selected careers exist in the local careerData object for comparison.');
+                // This is the error message you saw. It shouldn't appear anymore.
+                alert('An error occurred. Make sure the selected careers exist in the data fetched from the API.');
                 return;
             }
+
             const comparisonHTML = `
                 <h3>Comparison: ${career1.title} vs. ${career2.title}</h3>
                 <div class="comparison-grid">
                     <div class="comparison-item">
                         <h4>${career1.title}</h4>
-                        <p><strong>Description:</strong> ${career1.details}</p>
-                        <p><strong>Average Salary:</strong> ${career1.salary}</p>
+                        <p><strong>Description:</strong> ${career1.description}</p>
+                        <p><strong>Average Salary:</strong> ${career1.average_salary}</p>
                         <p><strong>Growth Potential:</strong> ${career1.growth}</p>
-                        <p><strong>Education Path:</strong> ${career1.education}</p>
+                        <p><strong>Key Skills:</strong> ${(career1.skills || []).join(', ')}</p>
                     </div>
                     <div class="comparison-item">
                         <h4>${career2.title}</h4>
-                        <p><strong>Description:</strong> ${career2.details}</p>
-                        <p><strong>Average Salary:</strong> ${career2.salary}</p>
+                        <p><strong>Description:</strong> ${career2.description}</p>
+                        <p><strong>Average Salary:</strong> ${career2.average_salary}</p>
                         <p><strong>Growth Potential:</strong> ${career2.growth}</p>
-                        <p><strong>Education Path:</strong> ${career2.education}</p>
+                        <p><strong>Key Skills:</strong> ${(career2.skills || []).join(', ')}</p>
                     </div>
                 </div>`;
             const resultsContainer = document.getElementById('comparison-results');
             resultsContainer.innerHTML = comparisonHTML;
             resultsContainer.style.display = 'block';
         }
-
+        
         // AI Chat Bot Functions
         function toggleAIChat() {
             const chatWindow = document.getElementById('ai-chat-window');
