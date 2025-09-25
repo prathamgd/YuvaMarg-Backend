@@ -1391,6 +1391,7 @@
         let currentModule = 'dashboard';
         let aiChatOpen = false;
         let selectedCareers = [];
+        let userAnswers = {}; // To store the user's quiz answers
 
         // --- 3. DYNAMIC DATA LOADING & RENDERING ---
         async function loadAndRender(endpoint, containerId, renderer) {
@@ -1412,6 +1413,109 @@
             } catch (error) {
                 container.innerHTML = `<p style="color:red; text-align:center;"><b>Error: Could not load data.</b><br>Please check if the backend server is running and the API URL is correct.</p>`;
                 console.error(`Failed to fetch ${endpoint}:`, error);
+            }
+        }
+
+        async function loadAndRender(endpoint, containerId, renderer) { /* ... */ }
+
+        // --- 4. NEW ASSESSMENT LOGIC ---
+
+        /**
+         * Starts an assessment by fetching questions from the backend and displaying the quiz.
+         * @param {string} type - The type of assessment (e.g., 'interest', 'personality').
+         */
+        async function startAssessment(type) {
+            const assessmentArea = document.getElementById('assessment-area');
+            assessmentArea.style.display = 'block';
+            assessmentArea.innerHTML = `<div class="loading-container"><div class="loading"></div><p>Loading Assessment...</p></div>`;
+            userAnswers = {}; // Reset answers for a new test
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/assessment/${type}`);
+                if (!response.ok) throw new Error('Failed to load assessment questions.');
+                const quizData = await response.json();
+                
+                let quizHtml = `<h3>${quizData.title || 'Assessment'}</h3>`;
+                quizData.questions.forEach((question, index) => {
+                    quizHtml += renderQuestion(question, index);
+                });
+                quizHtml += `<button class="btn" style="margin-top: 20px;" onclick="submitAssessment()">Submit Answers</button>`;
+                
+                assessmentArea.innerHTML = quizHtml;
+                assessmentArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } catch (error) {
+                assessmentArea.innerHTML = `<p style="color:red; text-align:center;"><b>Error: Could not load the assessment.</b><br>Please try again later.</p>`;
+                console.error(`Failed to start assessment:`, error);
+            }
+        }
+
+        /**
+         * Renders the HTML for a single quiz question.
+         * @param {object} question - The question object from the API.
+         * @param {number} index - The index of the question.
+         * @returns {string} The HTML string for the question.
+         */
+        function renderQuestion(question, index) {
+            let optionsHtml = '';
+            question.options.forEach(option => {
+                optionsHtml += `<div class="quiz-option" onclick="selectOption(this, ${index}, '${option}')">${option}</div>`;
+            });
+            return `
+                <div class="quiz-question">
+                    <h4>${index + 1}. ${question.text}</h4>
+                    <div class="quiz-options">
+                        ${optionsHtml}
+                    </div>
+                </div>`;
+        }
+
+        /**
+         * Handles the logic when a user clicks on a quiz option.
+         * @param {HTMLElement} element - The clicked option element.
+         * @param {number} questionIndex - The index of the question being answered.
+         * @param {string} answer - The selected answer text.
+         */
+        function selectOption(element, questionIndex, answer) {
+            // Store the answer
+            userAnswers[questionIndex] = answer;
+            
+            // Visually highlight the selected option
+            const optionsContainer = element.parentElement;
+            optionsContainer.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        /**
+         * Submits the collected answers to the backend and displays the results.
+         */
+        async function submitAssessment() {
+            const assessmentArea = document.getElementById('assessment-area');
+            assessmentArea.innerHTML = `<div class="loading-container"><div class="loading"></div><p>Analyzing your results...</p></div>`;
+            
+            try {
+                // In a real app, you would POST the userAnswers object. For the mock, we just trigger the result.
+                const response = await fetch(`${API_BASE_URL}/assessment/submit`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(userAnswers)
+                });
+                if (!response.ok) throw new Error('Failed to submit answers.');
+                const resultData = await response.json();
+
+                let resultHtml = `
+                    <h2>Assessment Complete! Here is your personalized roadmap:</h2>
+                    <div class="dashboard-card" style="text-align: left;">
+                        <h3>Top Recommendation: <span style="color: var(--primary-color);">${resultData.top_recommendation}</span></h3>`;
+                
+                resultData.roadmap_steps.forEach(step => {
+                    resultHtml += `<p><strong>Step ${step.step}: ${step.title}</strong><br>${step.details}</p><br>`;
+                });
+                
+                resultHtml += '</div>';
+                assessmentArea.innerHTML = resultHtml;
+            } catch (error) {
+                assessmentArea.innerHTML = `<p style="color:red; text-align:center;"><b>Error: Could not get results.</b><br>Please try again later.</p>`;
+                console.error(`Failed to submit assessment:`, error);
             }
         }
 
@@ -1725,6 +1829,7 @@
         // --- 6. INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', function() {
             initializeTheme();
+             console.log('Yuva Marg Interactive Quiz Platform Loaded!');
             
             document.querySelectorAll('.main-navigation .header-nav-tab').forEach(tab => {
                 if (tab.dataset.module) {
@@ -1740,6 +1845,7 @@
 
             console.log('Yuva Marg Enhanced Platform with AI Assistant Loaded Successfully!');
         });
+        
     </script>
 </body>
 </html>
