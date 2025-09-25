@@ -1,24 +1,29 @@
-from flask import Blueprint, jsonify
 import json
-import os
+from flask import Blueprint, jsonify
 
 # Create a Blueprint object for DJ's features
 dj_bp = Blueprint('dj_bp', __name__)
 
-# Define the API endpoint for opportunities
+# --- 1. CHANGE: Data loading is now in a clean helper function ---
+def load_dj_data():
+    """Loads DJ's mock data from the mock_data folder."""
+    try:
+        # --- 2. CHANGE: The file path now correctly points to 'mock_data/opportunities.json' ---
+        with open('mock_data/opportunities.json', 'r', encoding='utf-8') as f:
+            opportunities = json.load(f)
+        return opportunities
+    except FileNotFoundError:
+        print("ERROR: Could not find 'mock_data/opportunities.json'. Make sure the file exists.")
+        return {} # Return an empty dictionary to prevent a server crash
+
+# Load the data once when the server starts for better performance
+OPPORTUNITIES_DATA = load_dj_data()
+
+
+# --- API Endpoint ---
+
 @dj_bp.route('/opportunities', methods=['GET'])
 def get_opportunities():
-    try:
-        # Construct the full path to the opportunities.json file
-        file_path = os.path.join(os.path.dirname(__file__), '..', 'opportunities.json')
-        
-        # Open and read the JSON file
-        with open(file_path, 'r', encoding='utf-8') as f:
-            opportunities_data = json.load(f)
-        
-        # Return the data as a JSON response
-        return jsonify(opportunities_data)
-        
-    except FileNotFoundError:
-        # If the file is not found, return a 404 error
-        return jsonify({"error": "Opportunities data file not found."}), 404
+    # 3. CHANGE: Return the list of scholarships from within the loaded JSON data.
+    # The .get() method safely handles cases where the "scholarships" key might be missing.
+    return jsonify(OPPORTUNITIES_DATA.get("scholarships", []))
