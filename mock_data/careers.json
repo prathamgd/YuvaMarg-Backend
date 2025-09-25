@@ -3,14 +3,84 @@
     "id": 1,
     "title": "Software Developer",
     "description": "Designs, develops, and maintains software applications.",
-    "skills": ["Python", "JavaScript", "Java", "SQL"],
+    "skills": ["Python", "JavaScript", "Java", "SQL", "Git"],
     "average_salary": "₹7,00,000"
   },
   {
     "id": 2,
     "title": "Data Scientist",
     "description": "Analyzes and interprets complex data to help organizations make decisions.",
-    "skills": ["Python", "R", "SQL", "Machine Learning"],
+    "skills": ["Python", "R", "SQL", "Machine Learning", "Statistics"],
     "average_salary": "₹10,00,000"
+  },
+  {
+    "id": 3,
+    "title": "Mechanical Engineer",
+    "description": "Designs, builds, and tests mechanical devices, including tools, engines, and machines.",
+    "skills": ["CAD", "Thermodynamics", "Robotics", "Manufacturing Processes"],
+    "average_salary": "₹6,00,000"
+  },
+  {
+    "id": 4,
+    "title": "Doctor (MBBS)",
+    "description": "Diagnoses and treats illnesses and injuries, and provides preventive care.",
+    "skills": ["Medical Diagnosis", "Patient Care", "Anatomy", "Pharmacology"],
+    "average_salary": "₹12,00,000"
+  },
+  {
+    "id": 5,
+    "title": "Chartered Accountant (CA)",
+    "description": "Manages finances, provides financial advice, and helps with auditing and taxation.",
+    "skills": ["Auditing", "Taxation", "Financial Reporting", "Corporate Law"],
+    "average_salary": "₹8,00,000"
+  },
+  {
+    "id": 6,
+    "title": "Marketing Manager",
+    "description": "Develops and implements marketing strategies to promote products or services.",
+    "skills": ["SEO/SEM", "Content Strategy", "Market Research", "Branding"],
+    "average_salary": "₹9,00,000"
+  },
+  {
+    "id": 7,
+    "title": "UX/UI Designer",
+    "description": "Creates user-friendly interfaces that enable users to understand how to use complex technical products.",
+    "skills": ["Figma", "Adobe XD", "User Research", "Prototyping"],
+    "average_salary": "₹6,50,000"
+  },
+  {
+    "id": 8,
+    "title": "Civil Engineer",
+    "description": "Designs, constructs, and maintains infrastructure projects in the public and private sector.",
+    "skills": ["AutoCAD", "Project Management", "Structural Analysis", "Surveying"],
+    "average_salary": "₹5,50,000"
+  },
+  {
+    "id": 9,
+    "title": "Architect",
+    "description": "Plans and designs buildings and other structures, combining art and science.",
+    "skills": ["Architectural Design", "AutoCAD", "Revit", "Building Codes"],
+    "average_salary": "₹7,50,000"
+  },
+  {
+    "id": 10,
+    "title": "Civil Servant (IAS/IPS)",
+    "description": "Works in public administration, implementing government policies and managing departments.",
+    "skills": ["Public Administration", "Policy Making", "Leadership", "General Knowledge"],
+    "average_salary": "₹15,00,000"
+  },
+  {
+    "id": 11,
+    "title": "Lawyer",
+    "description": "Advises and represents clients in legal matters, both civil and criminal.",
+    "skills": ["Legal Research", "Argumentation", "Contract Law", "Litigation"],
+    "average_salary": "₹7,00,000"
+  },
+  {
+    "id": 12,
+    "title": "Cybersecurity Analyst",
+    "description": "Protects computer networks and systems from security breaches and cyberattacks.",
+    "skills": ["Network Security", "Ethical Hacking", "Cryptography", "Firewall Management"],
+    "average_salary": "₹8,50,000"
   }
 ]
