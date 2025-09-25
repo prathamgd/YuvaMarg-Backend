@@ -1,32 +1,35 @@
 [
   {
     "id": 1,
-    "question": "When faced with a complex problem, you prefer to:",
+    "question": "Which school project would you enjoy the most?",
     "options": [
-      { "text": "Analyze data and look for a logical solution.", "value": "Analytical" },
-      { "text": "Brainstorm creative and unconventional ideas.", "value": "Creative" },
-      { "text": "Organize tasks and create a structured plan.", "value": "Organizational" },
-      { "text": "Talk to people and understand their perspectives.", "value": "Social" }
+      { "text": "Analyzing historical data to find a new trend.", "value": "Analytical" },
+      { "text": "Designing the poster and presentation for the project.", "value": "Creative" },
+      { "text": "Organizing the team's schedule and tasks.", "value": "Organizational" },
+      { "text": "Interviewing people to gather information.", "value": "Social" },
+      { "text": "Building a physical model or prototype.", "value": "Practical" }
     ]
   },
   {
     "id": 2,
-    "question": "Which activity sounds most appealing on a free afternoon?",
+    "question": "When faced with a difficult problem in a subject, you first:",
     "options": [
-      { "text": "Building something with your hands or tools.", "value": "Practical" },
-      { "text": "Reading a book or learning something new.", "value": "Analytical" },
-      { "text": "Drawing, painting, or writing a story.", "value": "Creative" },
-      { "text": "Volunteering or spending time with friends.", "value": "Social" }
+      { "text": "Try to solve it by building or experimenting.", "value": "Practical" },
+      { "text": "Break it down into logical steps and formulas.", "value": "Analytical" },
+      { "text": "Brainstorm unique or unconventional solutions.", "value": "Creative" },
+      { "text": "Form a study group to discuss it with friends.", "value": "Social" },
+      { "text": "Create a structured study plan to tackle it.", "value": "Organizational" }
     ]
   },
   {
     "id": 3,
-    "question": "In a team project, you are most likely to be the one who:",
+    "question": "On a free day, you'd rather:",
     "options": [
-      { "text": "Keeps everyone on track and manages deadlines.", "value": "Organizational" },
-      { "text": "Comes up with the core vision or idea.", "value": "Creative" },
-      { "text": "Ensures the team works well together.", "value": "Social" },
-      { "text": "Does the detailed research and fact-checking.", "value": "Analytical" }
+      { "text": "Coordinate a local community event or club meeting.", "value": "Organizational" },
+      { "text": "Help a friend with a personal problem.", "value": "Social" },
+      { "text": "Take apart an old gadget to see how it works.", "value": "Practical" },
+      { "text": "Learn a new software or solve logic puzzles.", "value": "Analytical" },
+      { "text": "Write a story, draw, or play a musical instrument.", "value": "Creative" }
     ]
   }
 ]
