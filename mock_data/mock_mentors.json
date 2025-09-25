@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "Pratham Dedgaonkar",
+    "field": "Project Management",
+    "bio": "Expert in leading tech projects from start to finish.",
+    "experience": "8 years"
+  },
+  {
+    "id": 2,
+    "name": "Arjun Deokule",
+    "field": "Cybersecurity",
+    "bio": "Specialist in network security and threat analysis.",
+    "experience": "6 years"
+  },
+  {
+    "id": 3,
+    "name": "Amodini Dhadge",
+    "field": "User Experience (UX) Design",
+    "bio": "Focuses on creating intuitive and user-friendly digital products.",
+    "experience": "5 years"
+  },
+  {
+    "id": 4,
+    "name": "Divjot Singh Saluja",
+    "field": "Financial Technology (FinTech)",
+    "bio": "Experienced in developing solutions for the financial industry.",
+    "experience": "7 years"
+  },
+  {
+    "id": 5,
+    "name": "Arhan Dongare",
+    "field": "Cloud Computing",
+    "bio": "A cloud architect with expertise in deploying scalable applications.",
+    "experience": "9 years"
+  },
+  {
+    "id": 6,
+    "name": "Aryan Choudhari",
+    "field": "Artificial Intelligence Research",
+    "bio": "Conducts research in machine learning and AI model development.",
+    "experience": "4 years"
+  }
+]

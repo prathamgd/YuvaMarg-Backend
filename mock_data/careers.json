@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "title": "Software Developer",
+    "description": "Designs, develops, and maintains software applications.",
+    "skills": ["Python", "JavaScript", "Java", "SQL"],
+    "average_salary": "₹7,00,000"
+  },
+  {
+    "id": 2,
+    "title": "Data Scientist",
+    "description": "Analyzes and interprets complex data to help organizations make decisions.",
+    "skills": ["Python", "R", "SQL", "Machine Learning"],
+    "average_salary": "₹10,00,000"
+  }
+]

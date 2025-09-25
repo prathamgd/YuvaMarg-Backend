@@ -1,35 +1,47 @@
-from flask import Flask, jsonify, request
-import json
+import sys
+import os
+
+# --- Start of Diagnostic Code ---
+print("--- DIAGNOSTIC INFORMATION ---")
+print(f"Current Working Directory: {os.getcwd()}")
+print("\nPython's System Path (where it looks for modules):")
+for path in sys.path:
+    print(f"  -> {path}")
+print("----------------------------\n")
+# --- End of Diagnostic Code ---
+
+
+from flask import Flask, jsonify
+from flask_cors import CORS
+
+# ... (the rest of your main.py code) ...
+from routes.arjun_routes import arjun_bp
+
+from flask import Flask, jsonify
+from flask_cors import CORS
+
+# Import the blueprints from your team's route files
+from routes.arhan_routes import arhan_bp
+from routes.arjun_routes import arjun_bp
+from routes.amo_routes import amo_bp
+from routes.aryan_routes import aryan_bp
+from routes.dj_routes import dj_bp
 
 app = Flask(__name__)
+CORS(app)
 
-# Mock login endpoint
-@app.route('/api/login', methods=['POST'])
-def login():
-    with open('data/login_response.json') as f:
-        data = json.load(f)
-    return jsonify(data)
+# Register all the blueprints with the main Flask app
+app.register_blueprint(arhan_bp)
+app.register_blueprint(arjun_bp)
+app.register_blueprint(amo_bp)
+app.register_blueprint(aryan_bp)
+app.register_blueprint(dj_bp)
 
-# User preferences endpoint
-@app.route('/api/preferences', methods=['GET', 'POST'])
-def preferences():
-    if request.method == 'GET':
-        with open('data/user_preferences.json') as f:
-            data = json.load(f)
-        return jsonify(data)
-    elif request.method == 'POST':
-        request_data = request.get_json()
-        return jsonify({
-            "success": True,
-            "message": "Preferences updated successfully."
-        })
+# A simple root route to confirm the server is running
+@app.route('/', methods=['GET'])
+def index():
+    return jsonify({"message": "Welcome to the Yuva Marg Backend API!"})
 
-# Mock chatbot gateway endpoint
-@app.route('/api/chatbot', methods=['POST'])
-def chatbot():
-    with open('data/chatbot_response.json') as f:
-        data = json.load(f)
-    return jsonify(data)
-
+# This part allows you to run the app directly
 if __name__ == '__main__':
     app.run(debug=True)

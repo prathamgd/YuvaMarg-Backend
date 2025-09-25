@@ -1,0 +1,42 @@
+[
+  {
+    "id": "scholarship-inspire",
+    "type": "Scholarship",
+    "title": "INSPIRE Scholarship Program",
+    "description": "Merit-based scholarship for students pursuing science and technology courses.",
+    "deadline": "2025-12-15",
+    "amount": "₹80,000/year",
+    "eligibility": "Class 11-12 Science students",
+    "requirements": "60% marks in 10th"
+  },
+  {
+    "id": "competition-olympiad",
+    "type": "Competition",
+    "title": "National Science Olympiad",
+    "description": "Test your scientific knowledge and compete with students across India.",
+    "deadline": "2025-12-22",
+    "amount": "₹1,00,000 (1st Prize)",
+    "eligibility": "Class 11-12 students",
+    "requirements": "Registration required"
+  },
+  {
+    "id": "internship-isro",
+    "type": "Internship",
+    "title": "ISRO Summer Internship",
+    "description": "Work on real space technology projects under expert guidance.",
+    "deadline": "2026-01-15",
+    "amount": "₹15,000/month",
+    "eligibility": "Engineering students",
+    "requirements": "Good academic record"
+  },
+  {
+    "id": "exam-jee",
+    "type": "Exam",
+    "title": "JEE Main 2024",
+    "description": "Joint Entrance Examination for admission to NITs, IIITs and other centrally funded technical institutions.",
+    "deadline": "2025-11-20",
+    "amount": null,
+    "eligibility": "12th grade pass",
+    "requirements": "Online application"
+  }
+]

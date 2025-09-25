@@ -1,0 +1,5 @@
+{
+  "success": true,
+  "token": "fake-jwt-token-for-testing",
+  "userId": 1
+}

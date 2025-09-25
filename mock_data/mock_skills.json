@@ -1,0 +1,51 @@
+[
+  {
+    "id": 101,
+    "title": "The Complete Web Developer Course 3.0",
+    "description": "Learn to build websites and web apps using HTML, CSS, JavaScript, Python, and more.",
+    "level": "Beginner",
+    "link": "https://www.udemy.com/course/the-complete-web-developer-course-3/"
+  },
+  {
+    "id": 102,
+    "title": "Python for Data Science, AI & Development",
+    "description": "Learn the fundamentals of Python programming for data science and AI applications.",
+    "level": "Beginner",
+    "link": "https://www.coursera.org/learn/python-for-applied-data-science-ai"
+  },
+  {
+    "id": 103,
+    "title": "Google UX Design Professional Certificate",
+    "description": "A comprehensive course on user experience design, including wireframing, prototyping, and usability testing.",
+    "level": "Beginner",
+    "link": "https://www.coursera.org/professional-certificates/google-ux-design"
+  },
+  {
+    "id": 104,
+    "title": "IBM Data Science Professional Certificate",
+    "description": "Covering key topics like data analysis, data visualization, and machine learning with Python and SQL.",
+    "level": "Beginner",
+    "link": "https://www.coursera.org/professional-certificates/ibm-data-science-professional-certificate"
+  },
+  {
+    "id": 105,
+    "title": "AWS Certified Solutions Architect - Associate",
+    "description": "A popular certification course for learning to design and deploy scalable systems on Amazon Web Services (AWS).",
+    "level": "All Levels",
+    "link": "https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c03/"
+  },
+  {
+    "id": 106,
+    "title": "The Ultimate Graphic Design Course",
+    "description": "Learn design theory, branding, and tools like Photoshop, Illustrator, and InDesign.",
+    "level": "Beginner",
+    "link": "https://www.udemy.com/course/the-ultimate-graphic-design-course/"
+  },
+  {
+    "id": 107,
+    "title": "Machine Learning",
+    "description": "An intermediate-level specialization covering supervised and unsupervised machine learning.",
+    "level": "Intermediate",
+    "link": "https://www.coursera.org/specializations/machine-learning-introduction"
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "title": "The Hands-On Builder",
+  "description": "You have a talent for practical, hands-on work and tangible results. This roadmap is for careers where you can build, fix, and create.",
+  "recommended_careers": [
+    { "name": "Mechanical Engineer", "avg_salary": "₹7,00,000 LPA" },
+    { "name": "Electrician/Technician", "avg_salary": "₹4,50,000 LPA" },
+    { "name": "Civil Engineer", "avg_salary": "₹6,50,000 LPA" }
+  ],
+  "suggested_courses": ["B.Tech in Mechanical Engineering", "ITI Diploma in Electrical Trades", "B.Tech in Civil Engineering"]
+}

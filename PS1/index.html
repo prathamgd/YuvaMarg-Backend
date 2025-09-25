@@ -359,11 +359,11 @@
             border-radius: 15px;
             padding: 25px;
             transition: all 0.4s ease;
-            cursor: pointer;
             display: flex;
             flex-direction: column;
             position: relative;
             overflow: hidden;
+            min-height: 350px;
         }
 
         .career-card::before {
@@ -386,6 +386,17 @@
             transform: translateY(-8px);
             box-shadow: 0 20px 40px var(--shadow-color);
             border-color: var(--primary-color);
+        }
+
+        .career-card-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .career-card-footer {
+            margin-top: auto;
+            padding-top: 20px;
         }
 
         .career-badge {
@@ -456,6 +467,8 @@
             overflow: hidden;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            width: 100%;
+            text-align: center;
         }
 
         .btn::before {
@@ -812,6 +825,204 @@
             font-weight: bold;
         }
 
+        .ai-chat-bot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .ai-chat-toggle {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(83, 138, 25, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .ai-chat-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(83, 138, 25, 0.5);
+        }
+
+        .ai-chat-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: var(--card-color);
+            border-radius: 15px;
+            box-shadow: 0 10px 40px var(--shadow-color);
+            border: 2px solid var(--subtle-border-color);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .ai-chat-window.active {
+            display: flex;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .ai-chat-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .ai-chat-header h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ai-chat-close {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        .ai-chat-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .ai-chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .ai-message {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .ai-message.bot {
+            align-self: flex-start;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            color: #333;
+            border-bottom-left-radius: 6px;
+        }
+
+        .ai-message.user {
+            align-self: flex-end;
+            background: var(--primary-color);
+            color: white;
+            border-bottom-right-radius: 6px;
+        }
+
+        .ai-chat-input-container {
+            padding: 15px 20px;
+            border-top: 1px solid var(--subtle-border-color);
+            display: flex;
+            gap: 10px;
+        }
+
+        .ai-chat-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            background: var(--bg-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .ai-chat-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(83, 138, 25, 0.1);
+        }
+
+        .ai-chat-send {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .ai-chat-send:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(83, 138, 25, 0.3);
+        }
+
+        .ai-typing {
+            align-self: flex-start;
+            background: var(--subtle-border-color);
+            color: var(--text-color);
+            padding: 12px 16px;
+            border-radius: 18px;
+            border-bottom-left-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ai-typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .ai-typing-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            animation: typingBounce 1.4s infinite ease-in-out;
+        }
+
+        .ai-typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .ai-typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typingBounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
@@ -863,6 +1074,13 @@
 
             .module {
                 padding: 20px;
+            }
+
+            .ai-chat-window {
+                width: 90vw;
+                height: 70vh;
+                bottom: 80px;
+                right: 5vw;
             }
         }
 
@@ -938,6 +1156,10 @@
             <button class="header-nav-tab" data-module="mentorship">
                 <svg class="header-nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
                 Mentors
+            </button>
+            <button class="header-nav-tab" data-module="colleges">
+              <svg class="header-nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2L1 7l11 5 9-4.09V17h2V7L12 2zm0 7.91L3.74 7 12 3.09 20.26 7 12 9.91zM11 12v8h2v-8h-2z"/></svg>
+              Nearby Colleges
             </button>
         </nav>
 
@@ -1147,135 +1369,162 @@
         <section id="careers" class="module">
             <h2><span class="icon">C</span>Career Exploration Hub</h2>
             <input type="text" class="search-bar" placeholder="Search careers by name, field, or skills..." style="margin-bottom: 25px;">
-            
-            <div class="dashboard-card" style="margin-bottom: 25px;">
-                <h3>Career Recommendations for You</h3>
-                <p>Based on your profile, here are careers that align with your skills and interests:</p>
+
+            <div class="comparison-container" id="comparison-container">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                    <div>
+                        <strong>Career Comparison Tool (Select from cards)</strong>
+                        <p style="margin: 5px 0; opacity: 0.8;">Select up to 2 careers from the cards below to compare.</p>
+                        <span style="font-weight: 600;">Selected: <span id="comparison-count">0/2</span></span>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button id="compare-btn" class="btn" onclick="compareSelectedCareers()" disabled>Compare Selected</button>
+                        <button class="btn" style="background: var(--secondary-color); color: #333;" onclick="clearComparison()">Clear</button>
+                    </div>
+                </div>
             </div>
+            
+            
+
+            <div id="comparison-results" style="display: none; margin: 25px 0;">
+                </div>
 
             <div class="career-grid">
-                <div class="career-card">
-                    <div class="career-badge">96% Match</div>
-                    <h3>Software Engineer</h3>
-                    <p>Design and develop software applications, systems, and solutions using programming languages and technologies.</p>
-                    <div class="progress-container">
-                        <small>Skill Alignment</small>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 85%"></div>
+                <div class="career-card" data-career-id="software-engineer">
+                    <div class="career-card-content">
+                        <div class="career-badge">96% Match</div>
+                        <h3>Software Engineer</h3>
+                        <p>Design and develop software applications, systems, and solutions using programming languages and technologies.</p>
+                        <div class="progress-container">
+                            <small>Skill Alignment</small>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 15px;">
+                            <p><strong>Avg Salary:</strong> ₹8-25 LPA</p>
+                            <p><strong>Growth:</strong> High demand</p>
+                            <p><strong>Education:</strong> B.Tech in CS/IT</p>
                         </div>
                     </div>
-                    <div style="margin-top: 15px;">
-                        <p><strong>Avg Salary:</strong> ₹8-25 LPA</p>
-                        <p><strong>Growth:</strong> High demand</p>
-                        <p><strong>Education:</strong> B.Tech in CS/IT</p>
+                    <div class="career-card-footer" style="display: flex; gap: 10px;">
+                        <button class="btn" style="flex: 1;">Explore Details</button>
+                        <button class="btn" onclick="toggleComparison('software-engineer', this)" style="flex: 1; background: var(--secondary-color); color: #333;">Add to Compare</button>
                     </div>
-                    <button class="btn" style="margin-top: 15px;">Explore Details</button>
                 </div>
 
-                <div class="career-card">
-                    <div class="career-badge">92% Match</div>
-                    <h3>Data Scientist</h3>
-                    <p>Analyze complex data sets to help organizations make informed business decisions using statistical methods and machine learning.</p>
-                    <div class="progress-container">
-                        <small>Skill Alignment</small>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 80%"></div>
+                <div class="career-card" data-career-id="data-scientist">
+                    <div class="career-card-content">
+                        <div class="career-badge">92% Match</div>
+                        <h3>Data Scientist</h3>
+                        <p>Analyze complex data sets to help organizations make informed business decisions using statistical methods and machine learning.</p>
+                        <div class="progress-container">
+                            <small>Skill Alignment</small>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 15px;">
+                            <p><strong>Avg Salary:</strong> ₹12-30 LPA</p>
+                            <p><strong>Growth:</strong> Very High</p>
+                            <p><strong>Education:</strong> B.Tech/M.Tech + Analytics</p>
                         </div>
                     </div>
-                    <div style="margin-top: 15px;">
-                        <p><strong>Avg Salary:</strong> ₹12-30 LPA</p>
-                        <p><strong>Growth:</strong> Very High</p>
-                        <p><strong>Education:</strong> B.Tech/M.Tech + Analytics</p>
+                    <div class="career-card-footer" style="display: flex; gap: 10px;">
+                        <button class="btn" style="flex: 1;">Explore Details</button>
+                        <button class="btn" onclick="toggleComparison('data-scientist', this)" style="flex: 1; background: var(--secondary-color); color: #333;">Add to Compare</button>
                     </div>
-                    <button class="btn" style="margin-top: 15px;">Explore Details</button>
                 </div>
 
-                <div class="career-card">
-                    <div class="career-badge">88% Match</div>
-                    <h3>Mechanical Engineer</h3>
-                    <p>Design, develop, and test mechanical systems, machines, and devices across various industries.</p>
-                    <div class="progress-container">
-                        <small>Skill Alignment</small>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 75%"></div>
+                <div class="career-card" data-career-id="mechanical-engineer">
+                    <div class="career-card-content">
+                        <div class="career-badge">88% Match</div>
+                        <h3>Mechanical Engineer</h3>
+                        <p>Design, develop, and test mechanical systems, machines, and devices across various industries.</p>
+                        <div class="progress-container">
+                            <small>Skill Alignment</small>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 15px;">
+                            <p><strong>Avg Salary:</strong> ₹6-20 LPA</p>
+                            <p><strong>Growth:</strong> Stable</p>
+                            <p><strong>Education:</strong> B.Tech Mechanical</p>
                         </div>
                     </div>
-                    <div style="margin-top: 15px;">
-                        <p><strong>Avg Salary:</strong> ₹6-20 LPA</p>
-                        <p><strong>Growth:</strong> Stable</p>
-                        <p><strong>Education:</strong> B.Tech Mechanical</p>
+                    <div class="career-card-footer" style="display: flex; gap: 10px;">
+                        <button class="btn" style="flex: 1;">Explore Details</button>
+                        <button class="btn" onclick="toggleComparison('mechanical-engineer', this)" style="flex: 1; background: var(--secondary-color); color: #333;">Add to Compare</button>
                     </div>
-                    <button class="btn" style="margin-top: 15px;">Explore Details</button>
                 </div>
 
-                <div class="career-card">
-                    <div class="career-badge">85% Match</div>
-                    <h3>Research Scientist</h3>
-                    <p>Conduct research in specialized fields to advance knowledge and develop new technologies or solutions.</p>
-                    <div class="progress-container">
-                        <small>Skill Alignment</small>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 82%"></div>
+                <div class="career-card" data-career-id="research-scientist">
+                    <div class="career-card-content">
+                        <div class="career-badge">85% Match</div>
+                        <h3>Research Scientist</h3>
+                        <p>Conduct research in specialized fields to advance knowledge and develop new technologies or solutions.</p>
+                        <div class="progress-container">
+                            <small>Skill Alignment</small>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 82%"></div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 15px;">
+                            <p><strong>Avg Salary:</strong> ₹10-25 LPA</p>
+                            <p><strong>Growth:</strong> Moderate</p>
+                            <p><strong>Education:</strong> PhD in relevant field</p>
                         </div>
                     </div>
-                    <div style="margin-top: 15px;">
-                        <p><strong>Avg Salary:</strong> ₹10-25 LPA</p>
-                        <p><strong>Growth:</strong> Moderate</p>
-                        <p><strong>Education:</strong> PhD in relevant field</p>
+                    <div class="career-card-footer" style="display: flex; gap: 10px;">
+                        <button class="btn" style="flex: 1;">Explore Details</button>
+                        <button class="btn" onclick="toggleComparison('research-scientist', this)" style="flex: 1; background: var(--secondary-color); color: #333;">Add to Compare</button>
                     </div>
-                    <button class="btn" style="margin-top: 15px;">Explore Details</button>
                 </div>
 
-                <div class="career-card">
-                    <div class="career-badge">82% Match</div>
-                    <h3>Product Manager</h3>
-                    <p>Lead product development from conception to launch, working with cross-functional teams to deliver successful products.</p>
-                    <div class="progress-container">
-                        <small>Skill Alignment</small>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 70%"></div>
+                <div class="career-card" data-career-id="product-manager">
+                    <div class="career-card-content">
+                        <div class="career-badge">82% Match</div>
+                        <h3>Product Manager</h3>
+                        <p>Lead product development from conception to launch, working with cross-functional teams to deliver successful products.</p>
+                        <div class="progress-container">
+                            <small>Skill Alignment</small>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 15px;">
+                            <p><strong>Avg Salary:</strong> ₹15-40 LPA</p>
+                            <p><strong>Growth:</strong> High</p>
+                            <p><strong>Education:</strong> Engineering/MBA</p>
                         </div>
                     </div>
-                    <div style="margin-top: 15px;">
-                        <p><strong>Avg Salary:</strong> ₹15-40 LPA</p>
-                        <p><strong>Growth:</strong> High</p>
-                        <p><strong>Education:</strong> Engineering/MBA</p>
+                    <div class="career-card-footer" style="display: flex; gap: 10px;">
+                        <button class="btn" style="flex: 1;">Explore Details</button>
+                        <button class="btn" onclick="toggleComparison('product-manager', this)" style="flex: 1; background: var(--secondary-color); color: #333;">Add to Compare</button>
                     </div>
-                    <button class="btn" style="margin-top: 15px;">Explore Details</button>
                 </div>
 
-                <div class="career-card">
-                    <div class="career-badge">78% Match</div>
-                    <h3>Cybersecurity Analyst</h3>
-                    <p>Protect organizations from cyber threats by implementing security measures and monitoring for breaches.</p>
-                    <div class="progress-container">
-                        <small>Skill Alignment</small>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 65%"></div>
+                <div class="career-card" data-career-id="cybersecurity-analyst">
+                    <div class="career-card-content">
+                        <div class="career-badge">78% Match</div>
+                        <h3>Cybersecurity Analyst</h3>
+                        <p>Protect organizations from cyber threats by implementing security measures and monitoring for breaches.</p>
+                        <div class="progress-container">
+                            <small>Skill Alignment</small>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 15px;">
+                            <p><strong>Avg Salary:</strong> ₹8-22 LPA</p>
+                            <p><strong>Growth:</strong> Very High</p>
+                            <p><strong>Education:</strong> B.Tech CS + Certifications</p>
                         </div>
                     </div>
-                    <div style="margin-top: 15px;">
-                        <p><strong>Avg Salary:</strong> ₹8-22 LPA</p>
-                        <p><strong>Growth:</strong> Very High</p>
-                        <p><strong>Education:</strong> B.Tech CS + Certifications</p>
-                    </div>
-                    <button class="btn" style="margin-top: 15px;">Explore Details</button>
-                </div>
-            </div>
-
-            <div class="dashboard-card" style="margin-top: 30px;">
-                <h3>Career Comparison Tool</h3>
-                <p>Compare different careers side by side to make informed decisions:</p>
-                <div class="comparison-grid">
-                    <div class="comparison-item">
-                        <h4>Software Engineer</h4>
-                        <p><strong>Pros:</strong> High salary, growth opportunities, remote work</p>
-                        <p><strong>Cons:</strong> High competition, continuous learning required</p>
-                    </div>
-                    <div class="comparison-item">
-                        <h4>Data Scientist</h4>
-                        <p><strong>Pros:</strong> Very high demand, excellent pay, diverse applications</p>
-                        <p><strong>Cons:</strong> Requires advanced math, complex problem-solving</p>
+                    <div class="career-card-footer" style="display: flex; gap: 10px;">
+                        <button class="btn" style="flex: 1;">Explore Details</button>
+                        <button class="btn" onclick="toggleComparison('cybersecurity-analyst', this)" style="flex: 1; background: var(--secondary-color); color: #333;">Add to Compare</button>
                     </div>
                 </div>
             </div>
@@ -1473,6 +1722,51 @@
             </div>
         </section>
 
+        
+        <section id="colleges" class="module">
+            <h2><span class="icon">🎓</span> Nearby Colleges & Available Courses</h2>
+            <input type="text" class="search-bar" placeholder="Search colleges or courses..." style="margin-bottom: 25px;">
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>IIT Bombay</h3>
+                    <p><strong>Location:</strong> Mumbai, Maharashtra</p>
+                    <p><strong>Top Courses:</strong></p>
+                    <ul>
+                        <li>B.Tech in Computer Science</li>
+                        <li>B.Tech in Mechanical Engineering</li>
+                        <li>M.Tech in Data Science</li>
+                    </ul>
+                    <button class="btn">View More</button>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>Fergusson College</h3>
+                    <p><strong>Location:</strong> Pune, Maharashtra</p>
+                    <p><strong>Top Courses:</strong></p>
+                    <ul>
+                        <li>B.Sc in Physics</li>
+                        <li>B.A in Economics</li>
+                        <li>M.Sc in Biotechnology</li>
+                    </ul>
+                    <button class="btn">View More</button>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>Delhi University</h3>
+                    <p><strong>Location:</strong> New Delhi</p>
+                    <p><strong>Top Courses:</strong></p>
+                    <ul>
+                        <li>B.Com (Hons)</li>
+                        <li>B.A (Political Science)</li>
+                        <li>M.A (English Literature)</li>
+                    </ul>
+                    <button class="btn">View More</button>
+                </div>
+            </div>
+        </section>
+
+
         <section id="mentorship" class="module">
             <h2><span class="icon">M</span>Mentorship Network</h2>
             
@@ -1578,6 +1872,30 @@
         </section>
     </div>
 
+    <div class="ai-chat-bot">
+        <button class="ai-chat-toggle" onclick="toggleAIChat()">
+            <span id="ai-chat-icon">🤖</span>
+        </button>
+        
+        <div class="ai-chat-window" id="ai-chat-window">
+            <div class="ai-chat-header">
+                <h3>🤖 AI Career Assistant</h3>
+                <button class="ai-chat-close" onclick="toggleAIChat()">&times;</button>
+            </div>
+            
+            <div class="ai-chat-messages" id="ai-chat-messages">
+                <div class="ai-message bot">
+                    Hi! I'm your AI career assistant. I can help you with career guidance, study tips, and answer questions about your future path. How can I assist you today?
+                </div>
+            </div>
+            
+            <div class="ai-chat-input-container">
+                <input type="text" class="ai-chat-input" id="ai-chat-input" placeholder="Ask me anything about your career..." onkeypress="handleChatKeyPress(event)">
+                <button class="ai-chat-send" onclick="sendAIMessage()">➤</button>
+            </div>
+        </div>
+    </div>
+
     <footer style="margin-top: 60px; background: var(--card-color); color: var(--text-color); padding: 50px 20px; border-radius: 20px 20px 0 0; border-top: 3px solid var(--primary-color);">
         <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
             <h3 style="color: var(--primary-color); margin-bottom: 20px;">Yuva Marg - Empowering India's Future</h3>
@@ -1605,6 +1923,8 @@
 
     <script>
         let currentModule = 'dashboard';
+        let aiChatOpen = false;
+        let selectedCareers = [];
 
         function toggleTheme() {
             const body = document.body;
@@ -1659,6 +1979,274 @@
                 alert('Please enter valid credentials');
             }
         }
+        
+        const careerData = {
+            'software-engineer': {
+                title: 'Software Engineer',
+                details: 'Design and develop software applications, systems, and solutions using programming languages and technologies.',
+                salary: '₹8-25 LPA',
+                growth: 'High demand',
+                education: 'B.Tech in CS/IT'
+            },
+            'data-scientist': {
+                title: 'Data Scientist',
+                details: 'Analyze complex data sets to help organizations make informed business decisions using statistical methods and machine learning.',
+                salary: '₹12-30 LPA',
+                growth: 'Very High',
+                education: 'B.Tech/M.Tech + Analytics'
+            },
+            'mechanical-engineer': {
+                title: 'Mechanical Engineer',
+                details: 'Design, develop, and test mechanical systems, machines, and devices across various industries.',
+                salary: '₹6-20 LPA',
+                growth: 'Stable',
+                education: 'B.Tech Mechanical'
+            },
+            'research-scientist': {
+                title: 'Research Scientist',
+                details: 'Conduct research in specialized fields to advance knowledge and develop new technologies or solutions.',
+                salary: '₹10-25 LPA',
+                growth: 'Moderate',
+                education: 'PhD in relevant field'
+            },
+            'product-manager': {
+                title: 'Product Manager',
+                details: 'Lead product development from conception to launch, working with cross-functional teams to deliver successful products.',
+                salary: '₹15-40 LPA',
+                growth: 'High',
+                education: 'Engineering/MBA'
+            },
+            'cybersecurity-analyst': {
+                title: 'Cybersecurity Analyst',
+                details: 'Protect organizations from cyber threats by implementing security measures and monitoring for breaches.',
+                salary: '₹8-22 LPA',
+                growth: 'Very High',
+                education: 'B.Tech CS + Certifications'
+            }
+        };
+
+        function compareEnteredCareers() {
+            const input1 = document.getElementById('career1-input').value.trim().toLowerCase();
+            const input2 = document.getElementById('career2-input').value.trim().toLowerCase();
+
+            if (!input1 || !input2) {
+                alert('Please enter two careers to compare.');
+                return;
+            }
+
+            const careerKey1 = Object.keys(careerData).find(key => careerData[key].title.toLowerCase() === input1);
+            const careerKey2 = Object.keys(careerData).find(key => careerData[key].title.toLowerCase() === input2);
+
+            if (!careerKey1 || !careerKey2) {
+                alert('Could not find one or both careers. Please enter the exact titles as shown in the career cards.');
+                return;
+            }
+
+            const career1 = careerData[careerKey1];
+            const career2 = careerData[careerKey2];
+            
+            const comparisonHTML = `
+                <h3>Comparison: ${career1.title} vs. ${career2.title}</h3>
+                <div class="comparison-grid">
+                    <div class="comparison-item">
+                        <h4>${career1.title}</h4>
+                        <p><strong>Description:</strong> ${career1.details}</p>
+                        <p><strong>Average Salary:</strong> ${career1.salary}</p>
+                        <p><strong>Growth Potential:</strong> ${career1.growth}</p>
+                        <p><strong>Education Path:</strong> ${career1.education}</p>
+                    </div>
+                    <div class="comparison-item">
+                        <h4>${career2.title}</h4>
+                        <p><strong>Description:</strong> ${career2.details}</p>
+                        <p><strong>Average Salary:</strong> ${career2.salary}</p>
+                        <p><strong>Growth Potential:</strong> ${career2.growth}</p>
+                        <p><strong>Education Path:</strong> ${career2.education}</p>
+                    </div>
+                </div>
+            `;
+            
+            const resultsContainer = document.getElementById('comparison-results');
+            resultsContainer.innerHTML = comparisonHTML;
+            resultsContainer.style.display = 'block';
+            resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function toggleComparison(careerId, button) {
+            const index = selectedCareers.indexOf(careerId);
+            
+            if (index > -1) {
+                selectedCareers.splice(index, 1);
+                button.textContent = 'Add to Compare';
+                button.style.background = 'var(--secondary-color)';
+                button.style.color = '#333';
+            } else if (selectedCareers.length < 2) {
+                selectedCareers.push(careerId);
+                button.textContent = 'Added ✓';
+                button.style.background = 'var(--success-color)';
+                button.style.color = 'white';
+            } else {
+                alert('You can only compare 2 careers at a time. Please remove one first.');
+                return;
+            }
+            updateComparisonUI();
+        }
+
+        function updateComparisonUI() {
+            const countSpan = document.getElementById('comparison-count');
+            const compareBtn = document.getElementById('compare-btn');
+            const container = document.getElementById('comparison-container');
+            
+            countSpan.textContent = `${selectedCareers.length}/2`;
+            compareBtn.disabled = selectedCareers.length !== 2;
+            
+            if (selectedCareers.length > 0) {
+                container.classList.add('active');
+            } else {
+                container.classList.remove('active');
+            }
+        }
+
+        function clearComparison() {
+            selectedCareers = [];
+            document.querySelectorAll('.career-card button').forEach(button => {
+                if (button.textContent.includes('Added')) {
+                    button.textContent = 'Add to Compare';
+                    button.style.background = 'var(--secondary-color)';
+                    button.style.color = '#333';
+                }
+            });
+            updateComparisonUI();
+        }
+
+        function compareSelectedCareers() {
+            if (selectedCareers.length !== 2) return;
+            
+            const career1 = careerData[selectedCareers[0]];
+            const career2 = careerData[selectedCareers[1]];
+            
+            if (!career1 || !career2) {
+                alert('An error occurred while fetching career data.');
+                return;
+            }
+
+            const comparisonHTML = `
+                <h3>Comparison: ${career1.title} vs. ${career2.title}</h3>
+                <div class="comparison-grid">
+                    <div class="comparison-item">
+                        <h4>${career1.title}</h4>
+                        <p><strong>Description:</strong> ${career1.details}</p>
+                        <p><strong>Average Salary:</strong> ${career1.salary}</p>
+                        <p><strong>Growth Potential:</strong> ${career1.growth}</p>
+                        <p><strong>Education Path:</strong> ${career1.education}</p>
+                    </div>
+                    <div class="comparison-item">
+                        <h4>${career2.title}</h4>
+                        <p><strong>Description:</strong> ${career2.details}</p>
+                        <p><strong>Average Salary:</strong> ${career2.salary}</p>
+                        <p><strong>Growth Potential:</strong> ${career2.growth}</p>
+                        <p><strong>Education Path:</strong> ${career2.education}</p>
+                    </div>
+                </div>
+            `;
+            
+            const resultsContainer = document.getElementById('comparison-results');
+            resultsContainer.innerHTML = comparisonHTML;
+            resultsContainer.style.display = 'block';
+            resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+
+        // AI Chat Bot Functions
+        function toggleAIChat() {
+            const chatWindow = document.getElementById('ai-chat-window');
+            const chatIcon = document.getElementById('ai-chat-icon');
+            
+            aiChatOpen = !aiChatOpen;
+            
+            if (aiChatOpen) {
+                chatWindow.classList.add('active');
+                chatIcon.textContent = '✕';
+            } else {
+                chatWindow.classList.remove('active');
+                chatIcon.textContent = '🤖';
+            }
+        }
+
+        function sendAIMessage() {
+            const input = document.getElementById('ai-chat-input');
+            const message = input.value.trim();
+            
+            if (message === '') return;
+            
+            addChatMessage(message, 'user');
+            input.value = '';
+            showTypingIndicator();
+            
+            setTimeout(() => {
+                hideTypingIndicator();
+                const response = generateAIResponse(message);
+                addChatMessage(response, 'bot');
+            }, 1000 + Math.random() * 2000);
+        }
+
+        function addChatMessage(message, sender) {
+            const messagesContainer = document.getElementById('ai-chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `ai-message ${sender}`;
+            messageDiv.textContent = message;
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const messagesContainer = document.getElementById('ai-chat-messages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'ai-typing';
+            typingDiv.id = 'typing-indicator';
+            typingDiv.innerHTML = `
+                AI is typing...
+                <div class="ai-typing-dots">
+                    <div class="ai-typing-dot"></div>
+                    <div class="ai-typing-dot"></div>
+                    <div class="ai-typing-dot"></div>
+                </div>
+            `;
+            
+            messagesContainer.appendChild(typingDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            const typingIndicator = document.getElementById('typing-indicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+
+        function generateAIResponse(userMessage) {
+            const message = userMessage.toLowerCase();
+            
+            if (message.includes('career') || message.includes('job')) {
+                return "Based on your profile, I see you have strong analytical skills and interest in technology. Software engineering, data science, and research roles would be great fits. Would you like specific guidance on any of these paths?";
+            } else if (message.includes('study') || message.includes('exam')) {
+                return "For your current academic level, I recommend focusing on strengthening your math and science fundamentals. Consider taking practice tests for JEE and exploring online resources. What subject would you like help with?";
+            } else if (message.includes('scholarship') || message.includes('funding')) {
+                return "There are several scholarships available for students like you! The INSPIRE and KVPY programs are excellent options. I can help you understand eligibility criteria and application process. Which scholarship interests you most?";
+            } else if (message.includes('skill') || message.includes('learn')) {
+                return "Building relevant skills is crucial for your career success. Based on your interests, I'd recommend focusing on programming, data analysis, and communication skills. Would you like specific course recommendations?";
+            } else if (message.includes('mentor') || message.includes('guidance')) {
+                return "Mentorship can be incredibly valuable! I see several mentors in your field on the platform. Priya Sharma from Google could be perfect for tech guidance. Would you like help crafting a connection message?";
+            } else {
+                return "That's an interesting question! I'm here to help with career guidance, academic planning, skill development, and connecting you with opportunities. What specific aspect of your future would you like to explore?";
+            }
+        }
+
+        function handleChatKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendAIMessage();
+            }
+        }
 
         document.addEventListener('DOMContentLoaded', function() {
             initializeTheme();
@@ -1677,7 +2265,9 @@
                 });
             });
 
-            console.log('Yuva Marg Enhanced Platform Loaded Successfully!');
+            updateComparisonUI(); // Initialize the comparison tool UI
+
+            console.log('Yuva Marg Enhanced Platform with AI Assistant Loaded Successfully!');
         });
     </script>
 </body>
