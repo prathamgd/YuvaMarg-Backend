@@ -3,11 +3,27 @@
     "id": "scholarship-inspire",
     "type": "Scholarship",
     "title": "INSPIRE Scholarship Program",
-    "description": "Merit-based scholarship for students pursuing science and technology courses.",
+    "description": "Merit-based scholarship for students pursuing science and technology courses. Covers tuition fees and provides a monthly stipend.",
     "deadline": "2025-12-15",
     "amount": "₹80,000/year",
     "eligibility": "Class 11-12 Science students",
-    "requirements": "60% marks in 10th"
+    "requirements": "60% marks in 10th",
+    "career_match": 95,
+    "stream_filter": "Science",
+    "is_featured": true
+  },
+  {
+    "id": "scholarship-kvpy",
+    "type": "Scholarship",
+    "title": "Kishore Vaigyanik Protsahan Yojana (KVPY)",
+    "description": "Fellowship program for students with aptitude for research. Provides financial assistance for higher studies.",
+    "deadline": "2026-01-20",
+    "amount": "₹5,000-7,000/month",
+    "eligibility": "Research-oriented students",
+    "requirements": "Aptitude test + Interview",
+    "career_match": 88,
+    "stream_filter": "Science",
+    "is_featured": false
   },
   {
     "id": "competition-olympiad",
@@ -17,17 +33,23 @@
     "deadline": "2025-12-22",
     "amount": "₹1,00,000 (1st Prize)",
     "eligibility": "Class 11-12 students",
-    "requirements": "Registration required"
+    "requirements": "Registration required",
+    "career_match": 85,
+    "stream_filter": "All",
+    "is_featured": false
   },
   {
     "id": "internship-isro",
     "type": "Internship",
     "title": "ISRO Summer Internship",
-    "description": "Work on real space technology projects under expert guidance.",
+    "description": "Work on real space technology projects under expert guidance. Gain hands-on experience in aerospace engineering.",
     "deadline": "2026-01-15",
     "amount": "₹15,000/month",
     "eligibility": "Engineering students",
-    "requirements": "Good academic record"
+    "requirements": "Good academic record",
+    "career_match": 92,
+    "stream_filter": "Science",
+    "is_featured": true
   },
   {
     "id": "exam-jee",
@@ -37,6 +59,35 @@
     "deadline": "2025-11-20",
     "amount": null,
     "eligibility": "12th grade pass",
-    "requirements": "Online application"
+    "requirements": "Online application",
+    "career_match": 98,
+    "stream_filter": "Science",
+    "is_featured": false
+  },
+  {
+    "id": "scholarship-hdfc",
+    "type": "Scholarship",
+    "title": "HDFC Parivartan's COVID Crisis Support Scholarship",
+    "description": "Financial assistance for students whose families have been affected by the COVID crisis. Open to multiple streams.",
+    "deadline": "2026-03-01",
+    "amount": "Up to ₹75,000",
+    "eligibility": "Class 11-Graduate, family income < 6LPA",
+    "requirements": "Proof of financial need",
+    "career_match": 70,
+    "stream_filter": "All",
+    "is_featured": false
+  },
+  {
+    "id": "exam-clat",
+    "type": "Exam",
+    "title": "Common Law Admission Test (CLAT)",
+    "description": "National level entrance exam for admission to undergraduate and postgraduate law programmes in India.",
+    "deadline": "2025-10-30",
+    "amount": null,
+    "eligibility": "12th grade pass or appearing",
+    "requirements": "Online registration",
+    "career_match": 40,
+    "stream_filter": "Arts, Commerce",
+    "is_featured": false
   }
 ]
